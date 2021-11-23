@@ -1,0 +1,13 @@
+.container {
+  display: flex;
+  align-items: center;
+}
+
+.name {
+  font-weight: 700;
+  margin-right: 12px;
+}
+
+.link:hover {
+  color: #fa8072;
+}
