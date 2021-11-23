@@ -4,6 +4,17 @@ import { warnNotify } from "../services/tostify";
 import Section from "../components/Section/Section";
 import authOperations from "../redux/auth/auth-operations";
 
+const styles = {
+  form: {
+    width: 320,
+  },
+  label: {
+    display: "flex",
+    flexDirection: "column",
+    marginBottom: 15,
+  },
+};
+
 export default function RegisterView() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -32,7 +43,7 @@ export default function RegisterView() {
     <Section title="Заполните форму">
       <form>
         <div>
-          <label className="label" htmlFor="name"></label>
+          <label style={styles.label} htmlFor="name"></label>
           <input
             type="Name"
             name="Name"
@@ -43,7 +54,7 @@ export default function RegisterView() {
           />
         </div>
         <div>
-          <label htmlFor="email"></label>
+          <label style={styles.label} htmlFor="email"></label>
           <input
             type="email"
             name="email"
@@ -54,7 +65,7 @@ export default function RegisterView() {
           />
         </div>
         <div>
-          <label htmlFor="password"></label>
+          <label style={styles.label} htmlFor="password"></label>
           <input
             type="password"
             name="password"
@@ -64,17 +75,7 @@ export default function RegisterView() {
             onChange={({ target: { value } }) => setPassword(value)}
           />
         </div>
-        <div>
-          <label className="label" htmlFor="password"></label>
-          <input
-            type="password"
-            name="checkPassword"
-            id="checkPassword"
-            value={checkPass}
-            placeholder="подтвердите пароль"
-            onChange={({ target: { value } }) => setCheckPass(value)}
-          />
-        </div>
+
         <button type="submit" onClick={(e) => handleSubmit(e)}>
           Регистрация
         </button>

@@ -11,3 +11,7 @@
 .link:hover {
   color: #fa8072;
 }
+
+.link {
+  margin-right: 25px;
+}
