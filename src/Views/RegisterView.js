@@ -75,6 +75,22 @@ export default function RegisterView() {
             onChange={({ target: { value } }) => setPassword(value)}
           />
         </div>
+        <div className="inputWrapper">
+          <label
+            style={styles.label}
+            className="label"
+            htmlFor="password"
+          ></label>
+          <input
+            className="input"
+            type="password"
+            name="checkPassword"
+            id="checkPassword"
+            value={checkPass}
+            placeholder="подтвердите пароль"
+            onChange={({ target: { value } }) => setCheckPass(value)}
+          />
+        </div>
 
         <button type="submit" onClick={(e) => handleSubmit(e)}>
           Регистрация
