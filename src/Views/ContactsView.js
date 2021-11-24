@@ -1,25 +1,22 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchContacts } from "../redux/phonebook/phonebook-operations";
+import { fetchContacts } from "../redux/contacts/contacts-operations";
 import {
   getContacts,
-  getLoading,
-} from "../redux/phonebook/phonebook-selectors";
+  getIsLoading,
+} from "../redux/contacts/contacts-selectors";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from "react-loader-spinner";
+import Section from "../Layout/Section";
 import ContactForm from "../components/ContactForm/ContactForm";
-import ContactList from "../components/ContactList/ContactList";
+import ContactsList from "../components/ContactsList/ContactsList";
 import Filter from "../components/Filter/Filter";
-import ContactModal from "../components/ContactModal.js/ContactModal";
-import Section from "../components/Section/Section";
+import ContactModal from "../components/ContactModal/ContactModal";
 
-export default function ConactsView() {
+export default function ContactsView() {
   const contacts = useSelector(getContacts);
-
-  const isLoading = useSelector(getLoading);
-
+  const isLoading = useSelector(getIsLoading);
   const dispatch = useDispatch();
-
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [editContact, setEditContact] = useState({});
 
@@ -45,7 +42,7 @@ export default function ConactsView() {
       {contacts.length ? (
         <Section title="Контакты">
           <Filter />
-          <ContactList onOpenModal={handleOpenModal} />
+          <ContactsList onOpenModal={handleOpenModal} />
           {isOpenModal && (
             <ContactModal
               onCloseModal={setIsOpenModal}

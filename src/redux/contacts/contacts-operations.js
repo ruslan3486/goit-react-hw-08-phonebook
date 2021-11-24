@@ -1,71 +1,57 @@
 import axios from "axios";
-import {
-  fetchContactsRequest,
-  fetchContactsSucces,
-  fetchContactsError,
-  addContactsRequest,
-  addContactsSucces,
-  addContactsError,
-  delContactRequest,
-  delContactSucces,
-  delContactError,
-  editContactsRequest,
-  editContactsSuccess,
-  editContactsError,
-} from "./phonebook-actions";
+import contactsActions from "./contacts-actions";
 import { infoNotify, warnNotify } from "../../services/tostify";
 
-axios.defaults.baseURL = "https://connections-api.herokuapp.com";
-
 export const fetchContacts = () => async (dispatch) => {
-  dispatch(fetchContactsRequest());
+  dispatch(contactsActions.fetchContactsRequest());
+
   try {
     const { data } = await axios.get("/contacts");
 
-    dispatch(fetchContactsSucces(data));
+    dispatch(contactsActions.fetchContactsSuccess(data));
   } catch (error) {
-    dispatch(fetchContactsError(error.massage));
+    dispatch(contactsActions.fetchContactsError(error.massage));
     warnNotify(error.message);
   }
 };
 
 export const addContact = (name, number) => async (dispatch) => {
   const contact = { name, number };
-
-  dispatch(addContactsRequest());
+  dispatch(contactsActions.addContactsRequest());
   infoNotify("Запись добавлена");
+
   try {
     const { data } = await axios.post("/contacts", contact);
 
-    dispatch(addContactsSucces(data));
+    dispatch(contactsActions.addContactsSuccess(data));
   } catch (error) {
-    dispatch(addContactsError(error.massage));
+    dispatch(contactsActions.addContactsError(error.massage));
     warnNotify(error.message);
   }
 };
 
 export const deleteContacts = (id) => async (dispatch) => {
-  dispatch(delContactRequest());
+  dispatch(contactsActions.deleteContactsRequest());
 
   try {
     await axios.delete(`/contacts/${id}`);
 
-    dispatch(delContactSucces(id));
+    dispatch(contactsActions.deleteContactsSuccess(id));
   } catch (error) {
-    dispatch(delContactError(error.massage));
+    dispatch(contactsActions.deleteContactsError(error.massage));
     warnNotify(error.message);
   }
 };
 
 export const editContacts = (id, update) => async (dispatch) => {
-  dispatch(editContactsRequest());
+  dispatch(contactsActions.editContactsRequest());
 
   try {
     const { data } = await axios.patch(`/contacts/${id}`, update);
     console.log(data);
-    dispatch(editContactsSuccess(data));
+    dispatch(contactsActions.editContactsSuccess(data));
   } catch (error) {
-    dispatch(editContactsError(error.massage));
+    dispatch(contactsActions.editContactsError(error.massage));
     warnNotify(error.message);
   }
 };

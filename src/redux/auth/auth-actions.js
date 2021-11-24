@@ -1,33 +1,33 @@
 import { createAction } from "@reduxjs/toolkit";
 
-export const registerRequest = createAction("auth/registerRequest");
-export const registerSuccess = createAction("auth/registerSuccess");
-export const registerError = createAction("auth/registerError");
+const registerRequest = createAction("auth/registerRequest");
+const registerSuccess = createAction("auth/registerSuccess");
+const registerError = createAction("auth/registerError");
 
-export const logInRequest = createAction("auth/logInRequest");
-export const logInSuccess = createAction("auth/logInSuccess");
-export const logInError = createAction("auth/logInError");
+const logInRequest = createAction("auth/logInRequest");
+const logInSuccess = createAction("auth/logInSuccess");
+const logInError = createAction("auth/logInError");
 
-export const logOutRequest = createAction("auth/logOutRequest");
-export const logOutSuccess = createAction("auth/logOutSuccess");
-export const logOutError = createAction("auth/logOutError");
+const logOutRequest = createAction("auth/logOutRequest");
+const logOutSuccess = createAction("auth/logOutSuccess");
+const logOutError = createAction("auth/logOutError");
 
-export const getCurrentUserRequest = createAction("auth/getCurrentUserRequest");
-export const getCurrentUserSuccess = createAction("auth/getCurrentUserSuccess");
-export const getCurrentUserError = createAction("auth/getCurrentUserError");
+const getCurrentUserRequest = createAction("auth/getCurrentUserRequest");
+const getCurrentUserSuccess = createAction("auth/getCurrentUserSuccess");
+const getCurrentUserError = createAction("auth/getCurrentUserError");
 
 // eslint-disable-next-line import/no-anonymous-default-export
-// export default {
-//     registerRequest,
-//     registerSuccess,
-//     registerError,
-//     logInRequest,
-//     logInSuccess,
-//     logInError,
-//     logOutRequest,
-//     logOutSuccess,
-//     logOutError,
-//     getCurrentUserRequest,
-//     getCurrentUserSuccess,
-//     getCurrentUserError,
-// };
+export default {
+  registerRequest,
+  registerSuccess,
+  registerError,
+  logInRequest,
+  logInSuccess,
+  logInError,
+  logOutRequest,
+  logOutSuccess,
+  logOutError,
+  getCurrentUserRequest,
+  getCurrentUserSuccess,
+  getCurrentUserError,
+};

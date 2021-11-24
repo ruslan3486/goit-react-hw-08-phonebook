@@ -5,15 +5,16 @@ import { ImExit } from "react-icons/im";
 import s from "./Navigations.module.css";
 
 export default function UserMenu() {
-  const dispatch = useDispatch();
   const name = useSelector(getUserName);
+  const dispatch = useDispatch();
 
   return (
-    <div className={s.container}>
+    <div className={s.userWrapper}>
       <span className={s.name}>{name}</span>
 
       <ImExit
         size="20"
+        className={s.button}
         type="button"
         onClick={() => dispatch(authOperations.logOut())}
       />

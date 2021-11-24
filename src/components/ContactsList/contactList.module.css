@@ -29,8 +29,6 @@
   display: inline-block;
   font-size: 14px;
   padding: 0 10px 10px;
-  border-radius: 10px;
-  border-bottom: 1px solid salmon;
 }
 .nameText:not(:last-child) {
   margin-bottom: 20px;
@@ -38,7 +36,7 @@
 .button {
   background-color: transparent;
   border: none;
-  color: antiquewhite;
+  color: rgb(143, 88, 16);
   cursor: pointer;
 }
 

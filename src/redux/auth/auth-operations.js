@@ -1,21 +1,8 @@
 import axios from "axios";
-import {
-  registerRequest,
-  registerSuccess,
-  registerError,
-  logInRequest,
-  logInSuccess,
-  logInError,
-  logOutRequest,
-  logOutSuccess,
-  logOutError,
-  getCurrentUserRequest,
-  getCurrentUserSuccess,
-  getCurrentUserError,
-} from "./auth-actions";
+import authActions from "./auth-actions";
 import { infoNotify, warnNotify } from "../../services/tostify";
 
-axios.defaults.baseURL = "https://connections-api.herokuapp.com/";
+axios.defaults.baseURL = "https://goit-phonebook-api.herokuapp.com";
 
 const token = {
   set(token) {
@@ -27,40 +14,44 @@ const token = {
 };
 
 const register = (credentials) => async (dispatch) => {
-  dispatch(registerRequest());
+  dispatch(authActions.registerRequest());
 
   try {
     const { data } = await axios.post("/users/signup", credentials);
+
     token.set(data.token);
-    dispatch(registerSuccess(data));
+    dispatch(authActions.registerSuccess(data));
   } catch (error) {
-    dispatch(registerError(error.message));
+    dispatch(authActions.registerError(error.message));
     warnNotify(error.message);
   }
 };
 
 const logIn = (credentials) => async (dispatch) => {
-  dispatch(logInRequest());
+  dispatch(authActions.logInRequest());
+
   try {
     const { data } = await axios.post("/users/login", credentials);
+
     token.set(data.token);
-    dispatch(logInSuccess(data));
+    dispatch(authActions.logInSuccess(data));
     infoNotify("Добро пожаловать");
   } catch (error) {
-    dispatch(logInError(error.message));
+    dispatch(authActions.logInError(error.message));
     warnNotify(error.message);
   }
 };
 
 const logOut = () => async (dispatch) => {
-  dispatch(logOutRequest());
+  dispatch(authActions.logOutRequest());
 
   try {
     await axios.post("/users/logout");
+
     token.unset();
-    dispatch(logOutSuccess());
+    dispatch(authActions.logOutSuccess());
   } catch (error) {
-    dispatch(logOutError(error.message));
+    dispatch(authActions.logOutError(error.message));
     warnNotify(error.message);
   }
 };
@@ -76,20 +67,20 @@ const getCurrentUser = () => async (dispatch, getState) => {
 
   token.set(persistedToken);
 
-  dispatch(getCurrentUserRequest());
+  dispatch(authActions.getCurrentUserRequest());
 
   try {
-    const { data } = await axios.get("user/current");
-    dispatch(getCurrentUserSuccess(data));
+    const { data } = await axios.get("/users/current");
+    dispatch(authActions.getCurrentUserSuccess(data));
   } catch (error) {
-    dispatch(getCurrentUserError(error.message));
+    dispatch(authActions.getCurrentUserError(error.message));
+    // warnNotify(error.message);
   }
 };
 
 const authOperations = {
   token,
   register,
-
   logIn,
   logOut,
   getCurrentUser,

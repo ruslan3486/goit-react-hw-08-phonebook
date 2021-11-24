@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import Section from "../components/Section/Section";
+import Section from "../Layout/Section";
 import authOperations from "../redux/auth/auth-operations";
 
 export default function LoginViews() {
@@ -10,14 +10,15 @@ export default function LoginViews() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     dispatch(authOperations.logIn({ email, password }));
   };
 
   return (
     <Section title="Вход в аккаунт">
-      <div>
-        <form>
-          <div>
+      <div className="wrapper">
+        <form className="form">
+          <div className="inputWrapper">
             <label className="label" htmlFor="email">
               {/* email */}
             </label>
@@ -31,9 +32,12 @@ export default function LoginViews() {
               onChange={({ target: { value } }) => setEmail(value)}
             />
           </div>
-          <div>
-            <label htmlFor="password">{/* пароль */}</label>
+          <div className="inputWrapper">
+            <label className="label" htmlFor="password">
+              {/* пароль */}
+            </label>
             <input
+              className="input"
               type="password"
               name="password"
               id="password"

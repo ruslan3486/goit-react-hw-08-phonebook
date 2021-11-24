@@ -1,19 +1,8 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { warnNotify } from "../services/tostify";
-import Section from "../components/Section/Section";
+import Section from "../Layout/Section";
 import authOperations from "../redux/auth/auth-operations";
-
-const styles = {
-  form: {
-    width: 320,
-  },
-  label: {
-    display: "flex",
-    flexDirection: "column",
-    marginBottom: 15,
-  },
-};
 
 export default function RegisterView() {
   const [name, setName] = useState("");
@@ -41,10 +30,11 @@ export default function RegisterView() {
 
   return (
     <Section title="Заполните форму">
-      <form>
-        <div>
-          <label style={styles.label} htmlFor="name"></label>
+      <form className="form">
+        <div className="inputWrapper">
+          <label className="label" htmlFor="name"></label>
           <input
+            className="input"
             type="Name"
             name="Name"
             id="name"
@@ -53,9 +43,10 @@ export default function RegisterView() {
             onChange={({ target: { value } }) => setName(value)}
           />
         </div>
-        <div>
-          <label style={styles.label} htmlFor="email"></label>
+        <div className="inputWrapper">
+          <label className="label" htmlFor="email"></label>
           <input
+            className="input"
             type="email"
             name="email"
             id="email"
@@ -64,9 +55,10 @@ export default function RegisterView() {
             onChange={({ target: { value } }) => setEmail(value)}
           />
         </div>
-        <div>
-          <label style={styles.label} htmlFor="password"></label>
+        <div className="inputWrapper">
+          <label className="label" htmlFor="password"></label>
           <input
+            className="input"
             type="password"
             name="password"
             id="password"
@@ -76,11 +68,7 @@ export default function RegisterView() {
           />
         </div>
         <div className="inputWrapper">
-          <label
-            style={styles.label}
-            className="label"
-            htmlFor="password"
-          ></label>
+          <label className="label" htmlFor="password"></label>
           <input
             className="input"
             type="password"
@@ -91,8 +79,11 @@ export default function RegisterView() {
             onChange={({ target: { value } }) => setCheckPass(value)}
           />
         </div>
-
-        <button type="submit" onClick={(e) => handleSubmit(e)}>
+        <button
+          className="button"
+          type="submit"
+          onClick={(e) => handleSubmit(e)}
+        >
           Регистрация
         </button>
       </form>

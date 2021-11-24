@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { editContacts } from "../../redux/phonebook/phonebook-operations";
+import { editContacts } from "../../redux/contacts/contacts-operations";
 import s from "./ContactModal.module.css";
 import { FaRegWindowClose } from "react-icons/fa";
+
 export default function ContactModal({ contactData, onCloseModal }) {
   const { contact, id } = contactData;
   const [name, setName] = useState("");
@@ -15,6 +16,7 @@ export default function ContactModal({ contactData, onCloseModal }) {
         onCloseModal(false);
       }
     };
+
     window.addEventListener("keydown", handlePressEsc);
     return () => {
       window.removeEventListener("keydown", handlePressEsc);

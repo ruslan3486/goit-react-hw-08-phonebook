@@ -1,48 +1,39 @@
 import { combineReducers, createReducer } from "@reduxjs/toolkit";
-import {
-  registerSuccess,
-  registerError,
-  logInSuccess,
-  logInError,
-  logOutSuccess,
-  logOutError,
-  getCurrentUserSuccess,
-  getCurrentUserError,
-} from "./auth-actions";
+import authActions from "./auth-actions";
 
 const initialState = { name: null, email: null };
 
 const user = createReducer(initialState, {
-  [registerSuccess]: (_, { payload }) => payload.user,
-  [logInSuccess]: (_, { payload }) => payload.user,
-  [logOutSuccess]: () => initialState,
-  [getCurrentUserSuccess]: (_, { payload }) => payload,
+  [authActions.registerSuccess]: (_, { payload }) => payload.user,
+  [authActions.logInSuccess]: (_, { payload }) => payload.user,
+  [authActions.logOutSuccess]: () => initialState,
+  [authActions.getCurrentUserSuccess]: (_, { payload }) => payload,
 });
 
 const token = createReducer(null, {
-  [registerSuccess]: (_, { payload }) => payload.token,
-  [logInSuccess]: (_, { payload }) => payload.token,
-  [logOutSuccess]: () => null,
+  [authActions.registerSuccess]: (_, { payload }) => payload.token,
+  [authActions.logInSuccess]: (_, { payload }) => payload.token,
+  [authActions.logOutSuccess]: () => null,
 });
 
 const setError = (_, { payload }) => payload;
 
 const error = createReducer(null, {
-  [registerError]: setError,
-  [logInError]: setError,
-  [logOutError]: setError,
-  [getCurrentUserError]: setError,
+  [authActions.registerError]: setError,
+  [authActions.logInError]: setError,
+  [authActions.logOutError]: setError,
+  [authActions.getCurrentUserError]: setError,
 });
 
 const isAuthenticated = createReducer(false, {
-  [registerSuccess]: () => true,
-  [logInSuccess]: () => true,
-  [getCurrentUserSuccess]: () => true,
-  [logOutSuccess]: () => false,
-  [registerError]: () => false,
-  [logInError]: () => false,
-  [logOutError]: () => true,
-  [getCurrentUserError]: () => false,
+  [authActions.registerSuccess]: () => true,
+  [authActions.logInSuccess]: () => true,
+  [authActions.getCurrentUserSuccess]: () => true,
+  [authActions.logOutSuccess]: () => false,
+  [authActions.registerError]: () => false,
+  [authActions.logInError]: () => false,
+  [authActions.logOutError]: () => true,
+  [authActions.getCurrentUserError]: () => false,
 });
 
 export default combineReducers({

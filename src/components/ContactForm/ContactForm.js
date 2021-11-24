@@ -1,66 +1,69 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-// import PropTypes from 'prop-types';
-import s from "./ContactForm.module.css";
-import { addContact } from "../../redux/phonebook/phonebook-actions";
-import { getisAdded } from "../../redux/phonebook/phonebook-selectors";
+import propTypes from "prop-types";
+import { addContact } from "../../redux/contacts/contacts-operations";
+import { getIsAdded } from "../../redux/contacts/contacts-selectors";
 
-export default function ContactForm() {
+export default function ContactsForm() {
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
-  const isAdded = useSelector(getisAdded);
+  const isAdded = useSelector(getIsAdded);
   const dispatch = useDispatch();
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    // const data = (name) =>
-    //   contacts.map((contact) => contact.name).includes(name);
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
     if (isAdded(name)) {
       return alert(`${name} is already in contacts`);
     } else {
       dispatch(addContact(name, number));
     }
+
     setName("");
     setNumber("");
   };
 
   return (
-    <form className={s.text} onSubmit={(e) => handleSubmit(e)}>
-      <label id="name" className={s.text_contact} htmlFor="name">
-        <input
-          className={s.text_input}
-          type="text"
-          name="name"
-          value={name}
-          placeholder="Michael Jordan"
-          onChange={(e) => setName(e.target.value)}
-        />
-      </label>
-      <label id="phone" htmlFor="phone" className={s.text_contact}>
-        <input
-          className={s.text_input}
-          type="text"
-          name="number"
-          value={number}
-          placeholder="555-55-555"
-          onChange={(e) => setNumber(e.target.value)}
-        />
-      </label>
-      <button
-        className={s.text_button}
-        disabled={!(name && number)}
-        type="submit"
-      >
-        Add contacts
-      </button>
-    </form>
+    <>
+      <form className="form" onSubmit={(e) => handleSubmit(e)}>
+        <div className="inputWrapper">
+          <input
+            className="input"
+            type="text"
+            name="name"
+            id="name"
+            value={name}
+            placeholder="имя"
+            onChange={(e) => setName(e.target.value)}
+          />
+          <label
+            className={name ? "labelRight" : "label"}
+            htmlFor="name"
+          ></label>
+        </div>
+        <div className="inputWrapper">
+          <label
+            className={number ? "labelRight" : "label"}
+            htmlFor="phone"
+          ></label>
+          <input
+            className="input"
+            type="tel"
+            name="number"
+            id="number"
+            value={number}
+            placeholder="Номер телефона"
+            onChange={(e) => setNumber(e.target.value)}
+          />
+        </div>
+        <button className="button" type="submit" disabled={!(name && number)}>
+          Добавить
+        </button>
+      </form>
+    </>
   );
 }
 
-// ContactForm.propTypes = {
-
-//     name: PropTypes.string.isRequired,
-//   number: PropTypes.string.isRequired,
-// }
+ContactsForm.propTypes = {
+  onAddContacts: propTypes.func,
+};
