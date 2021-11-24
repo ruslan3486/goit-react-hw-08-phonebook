@@ -8,7 +8,7 @@ export default function HomeView() {
       <Section>
         <div>
           <h1>Добро пожаловать!</h1>
-          <NavLink to="/register">Register</NavLink>
+          <NavLink to="/register">register</NavLink>
 
           <p>
             Это приложение для записи и хранения телефонных номеров ваших друзей
@@ -39,7 +39,7 @@ export default function HomeView() {
 //         <h1 style={styles.title}>
 //             Приветственная страница нашего сервиса{' '}
 //             <span role="img" aria-label="Иконка приветствия">
-//                 💁‍♀️
+//                 💁
 //             </span>
 //         </h1>
 //     </div>

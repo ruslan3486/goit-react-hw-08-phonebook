@@ -29,8 +29,8 @@ export const fetchContacts = () => async (dispatch) => {
   }
 };
 
-export const addContact = (name, phone) => async (dispatch) => {
-  const contact = { name, phone };
+export const addContact = (name, number) => async (dispatch) => {
+  const contact = { name, number };
 
   dispatch(addContactsRequest());
   infoNotify("Запись добавлена");
@@ -44,7 +44,7 @@ export const addContact = (name, phone) => async (dispatch) => {
   }
 };
 
-export const deleteContact = (id) => async (dispatch) => {
+export const deleteContacts = (id) => async (dispatch) => {
   dispatch(delContactRequest());
 
   try {

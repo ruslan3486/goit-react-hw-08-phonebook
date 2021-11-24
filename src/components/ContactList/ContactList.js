@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import s from "./contactList.module.css";
 import { getFilteredContacts } from "../../redux/phonebook/phonebook-selectors";
 // import types from '../../redux/phonebook/phonebook-actions'
-import { deleteContact } from "../../redux/phonebook/phonebook-actions";
+import { deleteContacts } from "../../redux/phonebook/phonebook-operations";
 import { FaUserEdit, FaTrashAlt } from "react-icons/fa";
 export default function ContactList({ onOpenModal }) {
   // const { contacts, filter } = useSelector((state) => state);
@@ -22,18 +22,23 @@ export default function ContactList({ onOpenModal }) {
     <>
       <ul>
         {filterContacts.map(({ id, name, number }) => (
-          <li key={id}>
-            <p>
+          <li className={s.item} key={id}>
+            <p className={s.nameText}>
               {name}: <span>{number}</span>
             </p>
             <div>
-              <button
+              {/* <button
+                className={s.button}
                 type="button"
                 onClick={() => onOpenModal({ name, number }, id)}
               >
                 <FaUserEdit size="20" />
-              </button>
-              <button type="button" onClick={() => dispatch(deleteContact(id))}>
+              </button> */}
+              <button
+                className={s.button}
+                type="button"
+                onClick={() => dispatch(deleteContacts(id))}
+              >
                 <FaTrashAlt size="20" className={s.delete} />
               </button>
             </div>

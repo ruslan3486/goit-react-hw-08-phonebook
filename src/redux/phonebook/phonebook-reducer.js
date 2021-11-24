@@ -18,7 +18,7 @@ import {
   editContactsError,
 } from "./phonebook-actions";
 
-const contactsReducer = createReducer(
+const item = createReducer(
   [],
 
   {
@@ -36,7 +36,7 @@ const contactsReducer = createReducer(
   }
 );
 
-const loadingReducer = createReducer(false, {
+const isLoading = createReducer(false, {
   [fetchContactsRequest]: () => true,
   [fetchContactsSucces]: () => false,
   [fetchContactsError]: () => false,
@@ -54,14 +54,12 @@ const loadingReducer = createReducer(false, {
   [editContactsError]: () => false,
 });
 
-const filterReducer = createReducer("", {
+const filter = createReducer("", {
   [changeFilter]: (_, { payload }) => payload,
 });
 
-const counterReduser = combineReducers({
-  item: contactsReducer,
-  filter: filterReducer,
-  loading: loadingReducer,
+export default combineReducers({
+  item,
+  filter,
+  isLoading,
 });
-
-export default counterReduser;

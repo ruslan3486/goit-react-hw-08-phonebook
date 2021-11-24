@@ -12,9 +12,12 @@ import ContactList from "../components/ContactList/ContactList";
 import Filter from "../components/Filter/Filter";
 import ContactModal from "../components/ContactModal.js/ContactModal";
 import Section from "../components/Section/Section";
+
 export default function ConactsView() {
   const contacts = useSelector(getContacts);
+
   const isLoading = useSelector(getLoading);
+
   const dispatch = useDispatch();
 
   const [isOpenModal, setIsOpenModal] = useState(false);

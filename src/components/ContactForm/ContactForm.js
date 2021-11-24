@@ -4,25 +4,13 @@ import { useSelector, useDispatch } from "react-redux";
 import s from "./ContactForm.module.css";
 import { addContact } from "../../redux/phonebook/phonebook-actions";
 import { getisAdded } from "../../redux/phonebook/phonebook-selectors";
-export default function ContactForm() {
-  // state = {
-  //   number: '',
-  //   name: '',
-  // }
 
+export default function ContactForm() {
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
   const isAdded = useSelector(getisAdded);
   const dispatch = useDispatch();
-  // const nameId = uuidv4();
-  // const numberId = uuidv4();
 
-  // const onAddContacts = (name, phone) => dispatch(addContact(name, phone));
-
-  //     const handleChangeNumber = event => {
-  //     const { value } = event.currentTarget;
-  //     setNumber(value);
-  //   };
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -30,7 +18,7 @@ export default function ContactForm() {
     //   contacts.map((contact) => contact.name).includes(name);
 
     if (isAdded(name)) {
-      return `${name} is already in contacts`;
+      return alert(`${name} is already in contacts`);
     } else {
       dispatch(addContact(name, number));
     }

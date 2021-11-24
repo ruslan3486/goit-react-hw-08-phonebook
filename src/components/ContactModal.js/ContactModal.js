@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { editContacts } from "../../redux/phonebook/phonebook-operations";
-
+import s from "./ContactModal.module.css";
+import { FaRegWindowClose } from "react-icons/fa";
 export default function ContactModal({ contactData, onCloseModal }) {
   const { contact, id } = contactData;
   const [name, setName] = useState("");
@@ -36,15 +37,20 @@ export default function ContactModal({ contactData, onCloseModal }) {
   };
 
   return (
-    <div onClick={(e) => handleBackDropClick(e)}>
-      <div>
-        <button type="button" onClick={() => onCloseModal(false)}>
-          close
+    <div className={s.overlay} onClick={(e) => handleBackDropClick(e)}>
+      <div className={s.modal}>
+        <button
+          className={s.close}
+          type="button"
+          onClick={() => onCloseModal(false)}
+        >
+          <FaRegWindowClose size="30" className={s.closeIcon} />
         </button>
-        <form>
-          <div>
+        <form className={s.form}>
+          <div className="inputWrapper">
             <label htmlFor="editName"></label>
             <input
+              className="input"
               type="text"
               name="name"
               id="editName"
@@ -53,9 +59,10 @@ export default function ContactModal({ contactData, onCloseModal }) {
               onChange={({ target: { value } }) => setName(value)}
             />
           </div>
-          <div>
+          <div className="inputWrapper">
             <label htmlFor="editNumber"></label>
             <input
+              className="input"
               type="tel"
               name="number"
               id="editNamber"
@@ -65,7 +72,7 @@ export default function ContactModal({ contactData, onCloseModal }) {
             />
           </div>
 
-          <button type="button" onClick={handleSave}>
+          <button className="button" type="button" onClick={handleSave}>
             Сохранить
           </button>
         </form>
